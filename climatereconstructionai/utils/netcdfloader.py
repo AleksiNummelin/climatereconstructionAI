@@ -169,8 +169,9 @@ class NetCDFLoader(Dataset):
         img_indices[img_indices > self.img_length - 1] = self.img_length - 1
         if shuffle_masks:
             mask_indices = []
+            m_index = self.random.randint(0, self.mask_length - self.n_time_steps - 1)
             for j in range(self.n_time_steps):
-                mask_indices.append(self.random.randint(0, self.mask_length - 1))
+                mask_indices.append(m_index + j)
             mask_indices = sorted(mask_indices)
         else:
             mask_indices = img_indices
